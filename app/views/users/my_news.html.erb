@@ -1,0 +1,33 @@
+<h1>My News </h1>
+
+<h3>Top Headlines</h3>
+<div id="headline-lookup">
+  <%= form_tag search_headlines_path, method: :get, id: "headline-lookup-form" do %>
+    <div class="form-group row no-padding text-center col-md-12">
+      <div class="col-md-10">
+        <%= text_field_tag :headline, params[:headline], 
+                                  placeholder: "News Ticker", autofocus: true,
+                                  class: "form-control search-box input-lg" %>
+      </div>
+      <div class="col-md-2">
+        <%= button_tag(type: :submit, class: "btn btn-lg btn-success") do %>
+          <i class="fa fa-search"></i> Top Headlines
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<% if @headline %>
+    <div class="well results-block">
+        <div class="col-md-12">
+          <h4><u>Headlines:</u></h4>
+          <% for i in 0..@headline.length-1 do %>
+              <strong>(<%= i+1 %>) Title: </strong><%= @headline[i]["title"] %><br>
+              <strong>Author: </strong><%= @headline[i]["author"] %></br>
+              <strong>Description: </strong><%= @headline[i]["description"] %></br>
+              <strong>URL: </strong><%= @headline[i]["url"] %></br><br>
+          <% end %>
+        </div> 
+    </div>
+<% end %>
